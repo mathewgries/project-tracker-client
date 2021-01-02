@@ -45,8 +45,8 @@ export default function NewProject() {
     try {
       const attachment = file.current ? await s3Upload(file.current) : null;
 
-      await createProject({ fields, attachment });
-      history.push("/");
+      await createProject({ ...fields, attachment });
+      history.push("/projects");
     } catch (e) {
       onError(e);
       setIsLoading(false);

@@ -44,11 +44,11 @@ export default function Projects() {
             <span className="ml-2 font-weight-bold">Create a new project</span>
           </ListGroup.Item>
         </LinkContainer>
-        {projects.map(({ projectId, content, createdAt }) => (
+        {projects.map(({ projectId, projectName, createdAt }) => (
           <LinkContainer key={projectId} to={`/projects/${projectId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
-                {content.trim().split("\n")[0]}
+                {projectName.trim().split("\n")[0]}
               </span>
               <br />
               <span className="text-muted">
