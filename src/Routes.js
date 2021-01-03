@@ -7,6 +7,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewProject from "./projects/containers/NewProject";
 import Projects from "./projects/containers/Projects";
+import Project from "./projects/containers/Project";
 import NotFound from "./containers/NotFound";
 
 export default function Routes() {
@@ -26,6 +27,9 @@ export default function Routes() {
       </AuthenticatedRoute>
       <AuthenticatedRoute exact path="/projects/new">
         <NewProject />
+      </AuthenticatedRoute>
+      <AuthenticatedRoute exact path="/projects/:id">
+        <Project />
       </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}
       <Route>

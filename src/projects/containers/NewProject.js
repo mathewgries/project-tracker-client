@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { API } from "aws-amplify";
 import { useHistory } from "react-router-dom";
-import { useFormFields } from "../../libs/hooksLib";
 import { s3Upload } from "../../libs/awsLib";
 import { onError } from "../../libs/errorLib";
 import Form from "react-bootstrap/Form";
@@ -13,7 +12,7 @@ export default function NewProject() {
   const file = useRef(null);
   const history = useHistory();
   const [checked, setChecked] = useState(true);
-  const [fields, handleFieldChange] = useFormFields({
+  const [fields, setFields] = useState({
     projectName: "",
     projectDescription: "",
     isActive: true,
@@ -60,9 +59,8 @@ export default function NewProject() {
   }
 
   function handleCheckbox(e) {
-    const event = { target: { id: e.target.id, value: !checked } };
     setChecked(!checked);
-    handleFieldChange(event);
+    setFields({...fields, isActive: !checked});
   }
 
   return (
@@ -73,7 +71,7 @@ export default function NewProject() {
           <Form.Control
             value={fields.projectName}
             as="input"
-            onChange={handleFieldChange}
+            onChange={(e) => setFields({...fields, [e.target.id]: e.target.value})}
           />
         </Form.Group>
         <Form.Group controlId="projectDescription">
@@ -81,7 +79,7 @@ export default function NewProject() {
           <Form.Control
             value={fields.projectDescription}
             as="textarea"
-            onChange={handleFieldChange}
+            onChange={(e) => setFields({...fields, [e.target.id]: e.target.value})}
           />
         </Form.Group>
         <Form.Group controlId="isActive">

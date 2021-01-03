@@ -5,6 +5,7 @@ import { AppContext } from "./libs/contextLib";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Routes from "./Routes";
 import "./App.css";
 
@@ -39,7 +40,7 @@ function App() {
   return (
     !isAuthenticating && (
       <div className="App container py-3">
-        <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar collapseOnSelect bg="none" expand="md" className="mb-3">
           <LinkContainer to="/">
             <Navbar.Brand className="font-weight-bold text-muted">
               Project Tracker
@@ -68,9 +69,13 @@ function App() {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
-          <Routes />
-        </AppContext.Provider>
+        <ErrorBoundary>
+          <AppContext.Provider
+            value={{ isAuthenticated, userHasAuthenticated }}
+          >
+            <Routes />
+          </AppContext.Provider>
+        </ErrorBoundary>
       </div>
     )
   );

@@ -35,7 +35,7 @@ export default function Projects() {
     return API.get("projects", "/projects");
   }
 
-  function renderProjectList(project) {
+  function renderProjectList(projects) {
     return (
       <>
         <LinkContainer to="/projects/new">
