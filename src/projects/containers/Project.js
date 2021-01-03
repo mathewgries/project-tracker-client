@@ -91,7 +91,7 @@ export default function Notes() {
       }
 
       await saveProject({
-        ...fields,
+        ...fields, attachment: attachment || project.attachment
       });
       history.push("/projects");
     } catch (e) {
